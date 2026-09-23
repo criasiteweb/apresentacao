@@ -4,277 +4,240 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="dark" />
-<meta name="theme-color" content="#0D0F14" />
-<title>Criasiteweb | Apresentação para o comércio</title>
-<meta name="description" content="Sistema de pedidos próprio para o seu comércio: pague uma vez e o sistema é seu para sempre." />
+<meta name="theme-color" content="#0A0507" />
+<title>Cria Site | Apresentação</title>
+<meta name="description" content="Sistema de pedidos próprio para o seu comércio. Você paga uma vez e é seu para sempre." />
+<meta property="og:title" content="Cria Site | Sistema de pedidos para o seu comércio" />
+<meta property="og:description" content="Cardápio na internet, pedido no seu WhatsApp e painel para o balcão. Pague uma vez." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --preto:#0D0F14; --carvao:#151922; --giz:#1D222D;
+    --preto:#0A0507; --carvao:#150A0E; --giz:#1F0D13;
     --linha:rgba(255,255,255,.10);
-    --verde:#25C26E; --verde-claro:#5BE29A;
-    --vermelho:#F0564A; --dourado:#F5B83D;
-    --texto:#F2F4F8; --suave:rgba(242,244,248,.66);
+    --vinho:#8F1D33; --vinho-claro:#C7374F; --rosa:#E8637A;
+    --texto:#F4EEEB; --suave:rgba(244,238,235,.66);
+    --verde:#3FBE7C;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
     background:var(--preto);color:var(--texto);
     font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;
-    overflow:hidden;
+    font-size:19px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow:hidden;
   }
+  .palco{height:100dvh;display:flex;flex-direction:column;
+    background:radial-gradient(120% 70% at 50% 0%,rgba(143,29,51,.22),transparent 60%)}
 
-  .palco{height:100dvh;display:flex;flex-direction:column}
+  .topo{display:flex;align-items:center;gap:8px;padding:12px 16px 0;flex:none}
+  .cs{width:26px;height:26px;border-radius:6px;background:var(--vinho);color:#fff;
+    display:grid;place-items:center;font-size:.7rem;font-weight:800;letter-spacing:.02em}
+  .marca{font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--suave)}
 
-  /* ---------- barra de progresso ---------- */
-  .passos{display:flex;gap:4px;padding:10px 12px 0;flex:none}
-  .passos i{flex:1;height:4px;border-radius:999px;background:rgba(255,255,255,.14);transition:background .25s}
-  .passos i.feito{background:var(--verde)}
+  .passos{display:flex;gap:4px;padding:10px 16px 0;flex:none}
+  .passos i{flex:1;height:3px;border-radius:999px;background:rgba(255,255,255,.12);transition:background .25s}
+  .passos i.feito{background:var(--vinho-claro)}
 
-  /* ---------- slides ---------- */
   .trilho{flex:1;overflow:hidden;position:relative}
   .slide{
     position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
-    padding:20px 20px 96px;display:flex;flex-direction:column;justify-content:center;gap:14px;
-    opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .28s,transform .28s;
+    padding:18px 20px 104px;display:flex;flex-direction:column;justify-content:center;gap:16px;
+    opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .26s,transform .26s;
   }
   .slide.ativo{opacity:1;transform:none;pointer-events:auto}
 
-  .etiqueta{
-    align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--preto);background:var(--dourado);border-radius:999px;padding:.32rem .8rem;
-  }
-  .etiqueta.fria{background:transparent;color:var(--suave);border:1px solid var(--linha)}
-  h1{font-size:clamp(2rem,8vw,3.2rem);line-height:1.08;font-weight:900;letter-spacing:-.02em}
-  h2{font-size:clamp(1.6rem,6.4vw,2.5rem);line-height:1.12;font-weight:900;letter-spacing:-.02em}
-  h2 em,h1 em{font-style:normal;color:var(--verde-claro)}
-  h2 s{color:var(--vermelho);text-decoration-thickness:3px}
-  p.grande{font-size:1.12rem;color:var(--suave);line-height:1.55}
-  p.grande b{color:var(--texto)}
+  .etiqueta{align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--rosa)}
+  h1{font-family:"Playfair Display",Georgia,serif;font-weight:900;
+    font-size:clamp(2.1rem,8.6vw,3.4rem);line-height:1.06;letter-spacing:-.01em}
+  h2{font-family:"Playfair Display",Georgia,serif;font-weight:900;
+    font-size:clamp(1.9rem,7.6vw,2.9rem);line-height:1.08;letter-spacing:-.01em}
+  h1 em,h2 em{font-style:normal;color:var(--rosa)}
+  p.sub{font-size:1.1rem;color:var(--suave);line-height:1.5}
+  p.sub b{color:var(--texto)}
 
-  .cartao{background:var(--carvao);border:1px solid var(--linha);border-radius:16px;padding:16px}
-  .cartao.destaque{border-color:rgba(37,194,110,.45);background:linear-gradient(160deg,rgba(37,194,110,.14),rgba(37,194,110,.03))}
-  .cartao.alerta{border-color:rgba(240,86,74,.4);background:linear-gradient(160deg,rgba(240,86,74,.12),rgba(240,86,74,.02))}
-  .cartao h3{font-size:1.05rem;font-weight:800;margin-bottom:4px}
-  .cartao p{font-size:.95rem;color:var(--suave)}
+  .cartao{background:var(--carvao);border:1px solid var(--linha);border-radius:14px;padding:14px 16px}
+  .cartao h3{font-size:1.05rem;font-weight:800}
+  .cartao p{font-size:.98rem;color:var(--suave);margin-top:2px}
+  .cartao.forte{border-color:rgba(199,55,79,.5);
+    background:linear-gradient(160deg,rgba(143,29,51,.28),rgba(143,29,51,.06))}
+  .cartao.forte p{color:rgba(244,238,235,.82)}
 
-  .preco{font-size:2.6rem;font-weight:900;letter-spacing:-.03em;line-height:1}
-  .preco.ruim{color:var(--vermelho)}
-  .preco.bom{color:var(--verde-claro)}
-  .porano{font-size:.9rem;color:var(--suave);margin-top:2px}
+  .preco{font-family:"Playfair Display",Georgia,serif;font-size:2.7rem;font-weight:900;
+    line-height:1;color:var(--texto);margin-top:4px}
+  .preco.destaque{color:var(--rosa);font-size:3.2rem}
 
-  ul.lista{list-style:none;display:grid;gap:10px}
-  ul.lista li{display:flex;gap:10px;align-items:flex-start;font-size:1.02rem;line-height:1.4}
-  ul.lista li b{color:var(--texto)}
-  ul.lista .ok{color:var(--verde);font-weight:900;flex:none;width:1.2em}
-  ul.lista .nao{color:var(--vermelho);font-weight:900;flex:none;width:1.2em}
+  ul.itens{list-style:none;display:grid;gap:9px}
+  ul.itens li{display:flex;gap:10px;align-items:baseline;font-size:1.05rem}
+  ul.itens li::before{content:"✓";color:var(--verde);font-weight:800;flex:none}
 
-  table{width:100%;border-collapse:collapse;font-size:.95rem}
-  th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--linha)}
-  th{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--suave);font-weight:800}
-  td.v{font-weight:800;white-space:nowrap}
-  tr.nosso td{background:rgba(37,194,110,.10)}
-  tr.nosso td.v{color:var(--verde-claro)}
-  td.ruim{color:var(--vermelho);font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:1rem}
+  th,td{padding:11px 6px;text-align:left;border-bottom:1px solid var(--linha)}
+  th{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--suave);font-weight:800}
+  td.v{font-weight:800;white-space:nowrap;text-align:right}
+  tr.nosso td{background:rgba(143,29,51,.22)}
+  tr.nosso td.v{color:var(--rosa)}
 
-  .numero{font-size:3.4rem;font-weight:900;color:var(--dourado);line-height:1;letter-spacing:-.03em}
-
-  .frase{
-    border-left:3px solid var(--dourado);padding-left:14px;font-size:1.15rem;
-    font-weight:600;line-height:1.45;color:var(--texto);
-  }
-
-  /* ---------- rodapé de navegação ---------- */
-  .barra{
-    position:fixed;left:0;right:0;bottom:0;display:flex;gap:10px;align-items:center;
-    padding:12px 14px calc(12px + env(safe-area-inset-bottom));
-    background:linear-gradient(to top,var(--preto) 62%,transparent);
-  }
-  .barra button{
-    font-family:inherit;font-size:1rem;font-weight:800;border-radius:999px;border:1px solid var(--linha);
-    background:var(--giz);color:var(--texto);padding:.85rem 1.2rem;cursor:pointer;
-  }
-  .barra button.frente{flex:1;background:var(--verde);color:#062012;border-color:transparent}
-  .barra button:disabled{opacity:.35}
+  .barra{position:fixed;left:0;right:0;bottom:0;display:flex;gap:10px;align-items:center;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top,var(--preto) 60%,transparent)}
+  .barra button{font-family:inherit;font-size:1rem;font-weight:800;border-radius:10px;
+    border:1px solid var(--linha);background:var(--giz);color:var(--texto);padding:.9rem 1.15rem;cursor:pointer}
+  .barra button.frente{flex:1;background:var(--vinho);border-color:transparent;color:#fff}
+  .barra button:disabled{opacity:.3}
   .conta{font-size:.85rem;color:var(--suave);font-variant-numeric:tabular-nums;white-space:nowrap}
 
-  .zap{
-    display:inline-flex;align-items:center;gap:.5rem;background:var(--verde);color:#062012;
-    font-weight:800;text-decoration:none;border-radius:999px;padding:.9rem 1.3rem;font-size:1.05rem;
-    align-self:flex-start;
-  }
-  .link{color:var(--verde-claro);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(91,226,154,.4)}
+  .zap{display:inline-flex;align-items:center;gap:.5rem;background:var(--verde);color:#04160C;
+    font-weight:800;text-decoration:none;border-radius:10px;padding:.95rem 1.3rem;font-size:1.05rem;align-self:flex-start}
+  .link{color:var(--rosa);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(232,99,122,.45)}
 
-  @media (min-width:760px){
-    body{font-size:19px}
-    .slide{padding:40px 12% 110px;gap:18px}
+  @media (min-width:780px){
+    body{font-size:20px}
+    .slide{padding:40px 14% 116px;gap:20px}
+  }
+  @media print{
+    body{overflow:visible;background:#fff;color:#111}
+    .palco{height:auto;background:none}
+    .passos,.barra,.topo{display:none}
+    .trilho{overflow:visible;position:static}
+    .slide{position:static;opacity:1;transform:none;page-break-after:always;
+      min-height:92vh;padding:28px 26px;background:var(--preto);color:var(--texto)}
+    .slide.ativo{opacity:1}
   }
 </style>
 </head>
 <body>
 
 <div class="palco">
+  <div class="topo"><span class="cs">CS</span><span class="marca">Cria Site</span></div>
   <div class="passos" data-passos aria-hidden="true"></div>
 
   <div class="trilho" data-trilho>
 
     <!-- 1 -->
     <section class="slide">
-      <span class="etiqueta">Criasiteweb</span>
-      <h1>O seu comércio <em>vendendo sozinho</em> pelo WhatsApp.</h1>
-      <p class="grande">Cardápio digital, pedido caindo direto no WhatsApp e um painel para o balcão trabalhar. <b>Feito para o seu negócio, e não um modelo igual ao do concorrente.</b></p>
-      <div class="cartao destaque">
-        <h3>Você paga uma vez. O sistema é seu para sempre.</h3>
-        <p>Sem mensalidade. Sem aluguel. Sem perder tudo se um dia parar de pagar.</p>
+      <span class="etiqueta">Cria Site</span>
+      <h1>Seu comércio vendendo pelo <em>WhatsApp</em>.</h1>
+      <p class="sub">Cardápio na internet, pedido caindo direto no seu WhatsApp e um painel para o balcão trabalhar.</p>
+      <div class="cartao forte">
+        <h3>Você paga uma vez. É seu para sempre.</h3>
+        <p>Sem mensalidade.</p>
       </div>
     </section>
 
     <!-- 2 -->
     <section class="slide">
-      <span class="etiqueta fria">A pergunta que ninguém faz</span>
+      <span class="etiqueta">Pergunte</span>
       <h2>Quanto você paga <em>por mês</em> hoje?</h2>
-      <p class="grande">E o que acontece com o seu cardápio, o seu painel e o seu histórico de clientes <b>no dia em que você cancelar?</b></p>
-      <div class="cartao alerta">
-        <h3>A resposta é: você perde tudo.</h3>
-        <p>Nos sistemas por assinatura, nada daquilo é seu. Você aluga. Parou de pagar, o link morre e o cliente que ia pedir não encontra mais o seu cardápio.</p>
+      <p class="sub">E se um dia parar de pagar?</p>
+      <div class="cartao forte">
+        <h3>Você perde tudo.</h3>
+        <p>O cardápio sai do ar e o cliente não acha mais o seu link.</p>
       </div>
     </section>
 
     <!-- 3 -->
     <section class="slide">
-      <span class="etiqueta fria">O que existe hoje na região</span>
-      <h2>Todo mundo cobra <em>todo mês</em>.</h2>
-      <div class="cartao">
-        <h3>Cliente Fiel</h3>
-        <p>Planos de R$ 127, R$ 227 e R$ 327 por mês.</p>
-      </div>
-      <div class="cartao">
-        <h3>Pedidosite</h3>
-        <p>É o mesmo sistema do Cliente Fiel, só com outra marca na frente. Mesma tela, mesmo layout.</p>
-      </div>
-      <div class="cartao">
-        <h3>Wabiz</h3>
-        <p>R$ 325 para fazer, mais R$ 175 por mês depois. Prazo de até 10 dias.</p>
-      </div>
+      <span class="etiqueta">Quem cobra por mês</span>
+      <h2>Todos alugam. <em>Nenhum vende.</em></h2>
+      <div class="cartao"><h3>Cliente Fiel</h3><p>R$ 127 a R$ 327 por mês.</p></div>
+      <div class="cartao"><h3>Pedidosite</h3><p>É o mesmo sistema, com outra marca.</p></div>
+      <div class="cartao"><h3>Wabiz</h3><p>R$ 325 para fazer e R$ 175 por mês depois.</p></div>
     </section>
 
     <!-- 4 -->
     <section class="slide">
-      <span class="etiqueta">Faça a conta comigo</span>
-      <h2>O que isso vira em <em>três anos</em>.</h2>
+      <span class="etiqueta">Faça a conta</span>
+      <h2>Em <em>3 anos</em>.</h2>
       <table>
-        <thead><tr><th>Sistema</th><th>1º ano</th><th>3 anos</th></tr></thead>
+        <thead><tr><th>Sistema</th><th style="text-align:right">Total</th></tr></thead>
         <tbody>
-          <tr><td>Cliente Fiel básico</td><td class="v ruim">R$ 1.524</td><td class="v ruim">R$ 4.572</td></tr>
-          <tr><td>Cliente Fiel intermediário</td><td class="v ruim">R$ 2.724</td><td class="v ruim">R$ 8.172</td></tr>
-          <tr><td>Wabiz</td><td class="v ruim">R$ 2.425</td><td class="v ruim">R$ 6.625</td></tr>
-          <tr class="nosso"><td><b>Criasiteweb</b></td><td class="v">R$ 1.750</td><td class="v">R$ 1.750</td></tr>
+          <tr><td>Cliente Fiel básico</td><td class="v">R$ 4.572</td></tr>
+          <tr><td>Cliente Fiel completo</td><td class="v">R$ 8.172</td></tr>
+          <tr><td>Wabiz</td><td class="v">R$ 6.625</td></tr>
+          <tr class="nosso"><td><b>Cria Site</b></td><td class="v">R$ 1.750</td></tr>
         </tbody>
       </table>
-      <p class="grande">E, no fim dos três anos, <b>eles continuam alugando. Você já é dono do seu faz tempo.</b></p>
+      <p class="sub">Lá você paga para sempre. <b>Aqui você paga uma vez.</b></p>
     </section>
 
     <!-- 5 -->
     <section class="slide">
-      <span class="etiqueta fria">O detalhe que pega</span>
-      <h2>O site do concorrente vai ser <s>igual</s> ao seu.</h2>
-      <p class="grande">Esses sistemas são um modelo só para todo mundo. A pizzaria da esquina, a lanchonete do outro bairro e você ficam com a mesma tela, mudando a cor e a logo.</p>
-      <div class="cartao destaque">
-        <h3>Aqui é diferente</h3>
-        <p>Cada comércio ganha o seu visual, a sua cara e o seu jeito de vender. Quem chega no seu link vê a sua marca, não um sistema genérico.</p>
+      <span class="etiqueta">O detalhe</span>
+      <h2>O site deles é <em>igual</em> para todo mundo.</h2>
+      <p class="sub">A pizzaria da esquina fica com a mesma tela que a sua. Muda só a cor.</p>
+      <div class="cartao forte">
+        <h3>O seu vai ter a sua cara.</h3>
+        <p>Feito só para o seu comércio.</p>
       </div>
     </section>
 
     <!-- 6 -->
     <section class="slide">
       <span class="etiqueta">Prova</span>
-      <h2>Já está <em>rodando</em> e vendendo.</h2>
-      <p class="grande">Não é promessa nem desenho. São sistemas entregues, funcionando no balcão, todo dia.</p>
-      <div class="cartao">
-        <h3>Lanchonete Rei Burgão · Suzano</h3>
-        <p>Cardápio, delivery com taxa por bairro, painel com pedido ao vivo, comanda, caixa e relatório do mês.</p>
-      </div>
-      <div class="cartao">
-        <h3>Pizzaria Vitória · Ribeirão Pires</h3>
-        <p>95 sabores, meio a meio, borda grátis marcada, promoção e cartão de fidelidade.</p>
-      </div>
-      <p class="grande"><b>Posso abrir aqui na sua frente agora.</b></p>
+      <h2>Já está <em>funcionando</em>.</h2>
+      <div class="cartao"><h3>Lanchonete Rei Burgão</h3><p>Suzano.</p></div>
+      <div class="cartao"><h3>Pizzaria Vitória</h3><p>Ribeirão Pires.</p></div>
+      <p class="sub"><b>Quer ver? Eu abro agora no celular.</b></p>
     </section>
 
     <!-- 7 -->
     <section class="slide">
-      <span class="etiqueta fria">O que você recebe</span>
-      <h2>Tudo que eles cobram por mês, <em>de uma vez só</em>.</h2>
-      <ul class="lista">
-        <li><span class="ok">✓</span><span><b>Cardápio digital</b> com foto em todos os itens</span></li>
-        <li><span class="ok">✓</span><span><b>Pedido no WhatsApp</b> já escrito e somado</span></li>
-        <li><span class="ok">✓</span><span><b>Painel do balcão</b> com pedido ao vivo e alerta sonoro</span></li>
-        <li><span class="ok">✓</span><span><b>Comanda e impressão</b> em papel de 80 mm, ou sem impressora se você preferir</span></li>
-        <li><span class="ok">✓</span><span><b>Caixa do dia</b> e relatório do mês</span></li>
-        <li><span class="ok">✓</span><span><b>Taxa de entrega por bairro</b> e por distância</span></li>
-        <li><span class="ok">✓</span><span><b>Cupom de desconto</b> e <b>cartão de fidelidade</b></span></li>
-        <li><span class="ok">✓</span><span><b>QR code</b> para a mesa e para o balcão</span></li>
-        <li><span class="ok">✓</span><span><b>Você mesmo muda</b> preço, foto e item que acabou</span></li>
+      <span class="etiqueta">O que você recebe</span>
+      <h2>Tudo isso, <em>de uma vez</em>.</h2>
+      <ul class="itens">
+        <li>Cardápio com foto em tudo</li>
+        <li>Pedido pronto no seu WhatsApp</li>
+        <li>Painel do balcão com som de pedido novo</li>
+        <li>Comanda e impressão, se você quiser</li>
+        <li>Caixa do dia e relatório do mês</li>
+        <li>Taxa de entrega por bairro</li>
+        <li>Cupom de desconto e cartão de fidelidade</li>
+        <li>QR code para a mesa</li>
+        <li>Você mesmo muda preço e foto</li>
       </ul>
     </section>
 
     <!-- 8 -->
     <section class="slide">
-      <span class="etiqueta">Sem risco para você</span>
-      <h2>Eu monto <em>antes</em> de você decidir.</h2>
-      <p class="grande">Eu pego o seu cardápio e as suas fotos, monto o sistema inteiro com a sua marca e te mostro pronto, funcionando no seu celular.</p>
-      <div class="cartao destaque">
-        <h3>Você só fecha se gostar do que viu.</h3>
-        <p>Nada de assinar contrato para ver depois. Primeiro você vê o seu sistema pronto, com o seu nome e as suas pizzas. Aí a gente conversa.</p>
+      <span class="etiqueta">Sem risco</span>
+      <h2>Eu monto <em>antes</em>.</h2>
+      <p class="sub">Me passa o cardápio e as fotos. Eu monto tudo e te mostro pronto no seu celular.</p>
+      <div class="cartao forte">
+        <h3>Você só fecha se gostar.</h3>
+        <p>Primeiro vê pronto. Depois a gente conversa.</p>
       </div>
     </section>
 
     <!-- 9 -->
     <section class="slide">
-      <span class="etiqueta">Investimento</span>
-      <h2>Uma vez. E acabou.</h2>
-      <div class="cartao">
-        <h3>Site do cliente</h3>
-        <p>Cardápio digital, carrinho, pedido no WhatsApp, taxa por bairro, QR code.</p>
-        <div class="preco bom">R$ 750</div>
-      </div>
-      <div class="cartao">
-        <h3>Ferramenta do dono</h3>
-        <p>Painel com pedido ao vivo, comanda, caixa, relatório e edição do cardápio.</p>
-        <div class="preco bom">R$ 1.000</div>
-      </div>
-      <div class="cartao destaque">
-        <h3>Os dois juntos</h3>
-        <div class="preco bom">R$ 1.750</div>
-        <p class="porano">50% para começar, o resto na entrega. Pronto em 5 dias.</p>
-      </div>
+      <span class="etiqueta">Preço</span>
+      <h2>Uma vez. <em>E acabou.</em></h2>
+      <div class="cartao"><h3>Só o site</h3><div class="preco">R$ 750</div></div>
+      <div class="cartao"><h3>Só o painel do dono</h3><div class="preco">R$ 1.000</div></div>
+      <div class="cartao forte"><h3>Os dois juntos</h3><div class="preco destaque">R$ 1.750</div>
+        <p>Metade para começar. Pronto em 5 dias.</p></div>
     </section>
 
     <!-- 10 -->
     <section class="slide">
       <span class="etiqueta">Por que agora</span>
-      <h2>Cada mês parado custa <em>dinheiro</em>.</h2>
-      <div class="cartao alerta">
-        <h3>Se você assinar com eles hoje</h3>
-        <p>Em 8 meses você já terá pago o mesmo que pagaria uma vez só comigo. E no nono mês continua pagando.</p>
+      <h2>Cada mês parado <em>custa dinheiro</em>.</h2>
+      <div class="cartao forte">
+        <h3>Em 8 meses pagando eles…</h3>
+        <p>Você já gastou o mesmo que pagaria uma vez só aqui. E continua pagando.</p>
       </div>
-      <div class="cartao">
-        <h3>Prazo</h3>
-        <p>A Wabiz promete até 10 dias. <b>Eu entrego em 5</b>, porque o sistema já está pronto e testado.</p>
-      </div>
-      <p class="grande">Estou fechando poucos comércios por mês para conseguir dar atenção a cada um. <b>Quem entra agora entra primeiro.</b></p>
+      <div class="cartao"><h3>Prazo</h3><p>Eles levam 10 dias. Eu entrego em 5.</p></div>
     </section>
 
     <!-- 11 -->
     <section class="slide">
       <span class="etiqueta">Vamos começar</span>
-      <h2>Me passa o seu <em>cardápio</em>.</h2>
-      <p class="grande">Só isso. Cardápio e algumas fotos. Em poucos dias eu te mostro o seu sistema pronto, com a sua marca, funcionando no seu celular.</p>
-      <a class="zap" href="https://wa.me/5511994516869?text=Ol%C3%A1%21%20Quero%20ver%20como%20ficaria%20o%20sistema%20do%20meu%20com%C3%A9rcio." target="_blank" rel="noopener">Falar agora no WhatsApp</a>
-      <p class="grande">Criasiteweb · (11) 99451-6869<br /><a class="link" href="https://criasiteweb.github.io/pizzaria-vitoria/" target="_blank" rel="noopener">Ver um sistema pronto</a></p>
+      <h2>Me manda o seu <em>cardápio</em>.</h2>
+      <p class="sub">Só isso. Em poucos dias você vê o seu sistema pronto.</p>
+      <a class="zap" href="https://wa.me/5511994516869?text=Ol%C3%A1%21%20Quero%20ver%20como%20ficaria%20o%20sistema%20do%20meu%20com%C3%A9rcio." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <p class="sub">Cria Site · (11) 99451-6869<br /><a class="link" href="https://criasiteweb.github.io/pizzaria-vitoria/" target="_blank" rel="noopener">Ver um sistema pronto</a></p>
     </section>
 
   </div>
@@ -313,7 +276,6 @@
     if (e.key === "ArrowLeft") mostrar(atual - 1);
   });
 
-  /* arrastar com o dedo */
   let x0 = null, y0 = null;
   document.addEventListener("touchstart", e => {
     x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
