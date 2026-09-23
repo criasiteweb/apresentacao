@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#0D0F14" />
+<title>Criasiteweb | Apresentação para o comércio</title>
+<meta name="description" content="Sistema de pedidos próprio para o seu comércio: pague uma vez e o sistema é seu para sempre." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --preto:#0D0F14; --carvao:#151922; --giz:#1D222D;
+    --linha:rgba(255,255,255,.10);
+    --verde:#25C26E; --verde-claro:#5BE29A;
+    --vermelho:#F0564A; --dourado:#F5B83D;
+    --texto:#F2F4F8; --suave:rgba(242,244,248,.66);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--preto);color:var(--texto);
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+
+  .palco{height:100dvh;display:flex;flex-direction:column}
+
+  /* ---------- barra de progresso ---------- */
+  .passos{display:flex;gap:4px;padding:10px 12px 0;flex:none}
+  .passos i{flex:1;height:4px;border-radius:999px;background:rgba(255,255,255,.14);transition:background .25s}
+  .passos i.feito{background:var(--verde)}
+
+  /* ---------- slides ---------- */
+  .trilho{flex:1;overflow:hidden;position:relative}
+  .slide{
+    position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;
+    padding:20px 20px 96px;display:flex;flex-direction:column;justify-content:center;gap:14px;
+    opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .28s,transform .28s;
+  }
+  .slide.ativo{opacity:1;transform:none;pointer-events:auto}
+
+  .etiqueta{
+    align-self:flex-start;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--preto);background:var(--dourado);border-radius:999px;padding:.32rem .8rem;
+  }
+  .etiqueta.fria{background:transparent;color:var(--suave);border:1px solid var(--linha)}
+  h1{font-size:clamp(2rem,8vw,3.2rem);line-height:1.08;font-weight:900;letter-spacing:-.02em}
+  h2{font-size:clamp(1.6rem,6.4vw,2.5rem);line-height:1.12;font-weight:900;letter-spacing:-.02em}
+  h2 em,h1 em{font-style:normal;color:var(--verde-claro)}
+  h2 s{color:var(--vermelho);text-decoration-thickness:3px}
+  p.grande{font-size:1.12rem;color:var(--suave);line-height:1.55}
+  p.grande b{color:var(--texto)}
+
+  .cartao{background:var(--carvao);border:1px solid var(--linha);border-radius:16px;padding:16px}
+  .cartao.destaque{border-color:rgba(37,194,110,.45);background:linear-gradient(160deg,rgba(37,194,110,.14),rgba(37,194,110,.03))}
+  .cartao.alerta{border-color:rgba(240,86,74,.4);background:linear-gradient(160deg,rgba(240,86,74,.12),rgba(240,86,74,.02))}
+  .cartao h3{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+  .cartao p{font-size:.95rem;color:var(--suave)}
+
+  .preco{font-size:2.6rem;font-weight:900;letter-spacing:-.03em;line-height:1}
+  .preco.ruim{color:var(--vermelho)}
+  .preco.bom{color:var(--verde-claro)}
+  .porano{font-size:.9rem;color:var(--suave);margin-top:2px}
+
+  ul.lista{list-style:none;display:grid;gap:10px}
+  ul.lista li{display:flex;gap:10px;align-items:flex-start;font-size:1.02rem;line-height:1.4}
+  ul.lista li b{color:var(--texto)}
+  ul.lista .ok{color:var(--verde);font-weight:900;flex:none;width:1.2em}
+  ul.lista .nao{color:var(--vermelho);font-weight:900;flex:none;width:1.2em}
+
+  table{width:100%;border-collapse:collapse;font-size:.95rem}
+  th,td{padding:10px 8px;text-align:left;border-bottom:1px solid var(--linha)}
+  th{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--suave);font-weight:800}
+  td.v{font-weight:800;white-space:nowrap}
+  tr.nosso td{background:rgba(37,194,110,.10)}
+  tr.nosso td.v{color:var(--verde-claro)}
+  td.ruim{color:var(--vermelho);font-weight:700}
+
+  .numero{font-size:3.4rem;font-weight:900;color:var(--dourado);line-height:1;letter-spacing:-.03em}
+
+  .frase{
+    border-left:3px solid var(--dourado);padding-left:14px;font-size:1.15rem;
+    font-weight:600;line-height:1.45;color:var(--texto);
+  }
+
+  /* ---------- rodapé de navegação ---------- */
+  .barra{
+    position:fixed;left:0;right:0;bottom:0;display:flex;gap:10px;align-items:center;
+    padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top,var(--preto) 62%,transparent);
+  }
+  .barra button{
+    font-family:inherit;font-size:1rem;font-weight:800;border-radius:999px;border:1px solid var(--linha);
+    background:var(--giz);color:var(--texto);padding:.85rem 1.2rem;cursor:pointer;
+  }
+  .barra button.frente{flex:1;background:var(--verde);color:#062012;border-color:transparent}
+  .barra button:disabled{opacity:.35}
+  .conta{font-size:.85rem;color:var(--suave);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  .zap{
+    display:inline-flex;align-items:center;gap:.5rem;background:var(--verde);color:#062012;
+    font-weight:800;text-decoration:none;border-radius:999px;padding:.9rem 1.3rem;font-size:1.05rem;
+    align-self:flex-start;
+  }
+  .link{color:var(--verde-claro);font-weight:700;text-decoration:none;border-bottom:1px solid rgba(91,226,154,.4)}
+
+  @media (min-width:760px){
+    body{font-size:19px}
+    .slide{padding:40px 12% 110px;gap:18px}
+  }
+</style>
+</head>
+<body>
+
+<div class="palco">
+  <div class="passos" data-passos aria-hidden="true"></div>
+
+  <div class="trilho" data-trilho>
+
+    <!-- 1 -->
+    <section class="slide">
+      <span class="etiqueta">Criasiteweb</span>
+      <h1>O seu comércio <em>vendendo sozinho</em> pelo WhatsApp.</h1>
+      <p class="grande">Cardápio digital, pedido caindo direto no WhatsApp e um painel para o balcão trabalhar. <b>Feito para o seu negócio, e não um modelo igual ao do concorrente.</b></p>
+      <div class="cartao destaque">
+        <h3>Você paga uma vez. O sistema é seu para sempre.</h3>
+        <p>Sem mensalidade. Sem aluguel. Sem perder tudo se um dia parar de pagar.</p>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide">
+      <span class="etiqueta fria">A pergunta que ninguém faz</span>
+      <h2>Quanto você paga <em>por mês</em> hoje?</h2>
+      <p class="grande">E o que acontece com o seu cardápio, o seu painel e o seu histórico de clientes <b>no dia em que você cancelar?</b></p>
+      <div class="cartao alerta">
+        <h3>A resposta é: você perde tudo.</h3>
+        <p>Nos sistemas por assinatura, nada daquilo é seu. Você aluga. Parou de pagar, o link morre e o cliente que ia pedir não encontra mais o seu cardápio.</p>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <span class="etiqueta fria">O que existe hoje na região</span>
+      <h2>Todo mundo cobra <em>todo mês</em>.</h2>
+      <div class="cartao">
+        <h3>Cliente Fiel</h3>
+        <p>Planos de R$ 127, R$ 227 e R$ 327 por mês.</p>
+      </div>
+      <div class="cartao">
+        <h3>Pedidosite</h3>
+        <p>É o mesmo sistema do Cliente Fiel, só com outra marca na frente. Mesma tela, mesmo layout.</p>
+      </div>
+      <div class="cartao">
+        <h3>Wabiz</h3>
+        <p>R$ 325 para fazer, mais R$ 175 por mês depois. Prazo de até 10 dias.</p>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide">
+      <span class="etiqueta">Faça a conta comigo</span>
+      <h2>O que isso vira em <em>três anos</em>.</h2>
+      <table>
+        <thead><tr><th>Sistema</th><th>1º ano</th><th>3 anos</th></tr></thead>
+        <tbody>
+          <tr><td>Cliente Fiel básico</td><td class="v ruim">R$ 1.524</td><td class="v ruim">R$ 4.572</td></tr>
+          <tr><td>Cliente Fiel intermediário</td><td class="v ruim">R$ 2.724</td><td class="v ruim">R$ 8.172</td></tr>
+          <tr><td>Wabiz</td><td class="v ruim">R$ 2.425</td><td class="v ruim">R$ 6.625</td></tr>
+          <tr class="nosso"><td><b>Criasiteweb</b></td><td class="v">R$ 1.750</td><td class="v">R$ 1.750</td></tr>
+        </tbody>
+      </table>
+      <p class="grande">E, no fim dos três anos, <b>eles continuam alugando. Você já é dono do seu faz tempo.</b></p>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <span class="etiqueta fria">O detalhe que pega</span>
+      <h2>O site do concorrente vai ser <s>igual</s> ao seu.</h2>
+      <p class="grande">Esses sistemas são um modelo só para todo mundo. A pizzaria da esquina, a lanchonete do outro bairro e você ficam com a mesma tela, mudando a cor e a logo.</p>
+      <div class="cartao destaque">
+        <h3>Aqui é diferente</h3>
+        <p>Cada comércio ganha o seu visual, a sua cara e o seu jeito de vender. Quem chega no seu link vê a sua marca, não um sistema genérico.</p>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide">
+      <span class="etiqueta">Prova</span>
+      <h2>Já está <em>rodando</em> e vendendo.</h2>
+      <p class="grande">Não é promessa nem desenho. São sistemas entregues, funcionando no balcão, todo dia.</p>
+      <div class="cartao">
+        <h3>Lanchonete Rei Burgão · Suzano</h3>
+        <p>Cardápio, delivery com taxa por bairro, painel com pedido ao vivo, comanda, caixa e relatório do mês.</p>
+      </div>
+      <div class="cartao">
+        <h3>Pizzaria Vitória · Ribeirão Pires</h3>
+        <p>95 sabores, meio a meio, borda grátis marcada, promoção e cartão de fidelidade.</p>
+      </div>
+      <p class="grande"><b>Posso abrir aqui na sua frente agora.</b></p>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <span class="etiqueta fria">O que você recebe</span>
+      <h2>Tudo que eles cobram por mês, <em>de uma vez só</em>.</h2>
+      <ul class="lista">
+        <li><span class="ok">✓</span><span><b>Cardápio digital</b> com foto em todos os itens</span></li>
+        <li><span class="ok">✓</span><span><b>Pedido no WhatsApp</b> já escrito e somado</span></li>
+        <li><span class="ok">✓</span><span><b>Painel do balcão</b> com pedido ao vivo e alerta sonoro</span></li>
+        <li><span class="ok">✓</span><span><b>Comanda e impressão</b> em papel de 80 mm, ou sem impressora se você preferir</span></li>
+        <li><span class="ok">✓</span><span><b>Caixa do dia</b> e relatório do mês</span></li>
+        <li><span class="ok">✓</span><span><b>Taxa de entrega por bairro</b> e por distância</span></li>
+        <li><span class="ok">✓</span><span><b>Cupom de desconto</b> e <b>cartão de fidelidade</b></span></li>
+        <li><span class="ok">✓</span><span><b>QR code</b> para a mesa e para o balcão</span></li>
+        <li><span class="ok">✓</span><span><b>Você mesmo muda</b> preço, foto e item que acabou</span></li>
+      </ul>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide">
+      <span class="etiqueta">Sem risco para você</span>
+      <h2>Eu monto <em>antes</em> de você decidir.</h2>
+      <p class="grande">Eu pego o seu cardápio e as suas fotos, monto o sistema inteiro com a sua marca e te mostro pronto, funcionando no seu celular.</p>
+      <div class="cartao destaque">
+        <h3>Você só fecha se gostar do que viu.</h3>
+        <p>Nada de assinar contrato para ver depois. Primeiro você vê o seu sistema pronto, com o seu nome e as suas pizzas. Aí a gente conversa.</p>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <span class="etiqueta">Investimento</span>
+      <h2>Uma vez. E acabou.</h2>
+      <div class="cartao">
+        <h3>Site do cliente</h3>
+        <p>Cardápio digital, carrinho, pedido no WhatsApp, taxa por bairro, QR code.</p>
+        <div class="preco bom">R$ 750</div>
+      </div>
+      <div class="cartao">
+        <h3>Ferramenta do dono</h3>
+        <p>Painel com pedido ao vivo, comanda, caixa, relatório e edição do cardápio.</p>
+        <div class="preco bom">R$ 1.000</div>
+      </div>
+      <div class="cartao destaque">
+        <h3>Os dois juntos</h3>
+        <div class="preco bom">R$ 1.750</div>
+        <p class="porano">50% para começar, o resto na entrega. Pronto em 5 dias.</p>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide">
+      <span class="etiqueta">Por que agora</span>
+      <h2>Cada mês parado custa <em>dinheiro</em>.</h2>
+      <div class="cartao alerta">
+        <h3>Se você assinar com eles hoje</h3>
+        <p>Em 8 meses você já terá pago o mesmo que pagaria uma vez só comigo. E no nono mês continua pagando.</p>
+      </div>
+      <div class="cartao">
+        <h3>Prazo</h3>
+        <p>A Wabiz promete até 10 dias. <b>Eu entrego em 5</b>, porque o sistema já está pronto e testado.</p>
+      </div>
+      <p class="grande">Estou fechando poucos comércios por mês para conseguir dar atenção a cada um. <b>Quem entra agora entra primeiro.</b></p>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <span class="etiqueta">Vamos começar</span>
+      <h2>Me passa o seu <em>cardápio</em>.</h2>
+      <p class="grande">Só isso. Cardápio e algumas fotos. Em poucos dias eu te mostro o seu sistema pronto, com a sua marca, funcionando no seu celular.</p>
+      <a class="zap" href="https://wa.me/5511994516869?text=Ol%C3%A1%21%20Quero%20ver%20como%20ficaria%20o%20sistema%20do%20meu%20com%C3%A9rcio." target="_blank" rel="noopener">Falar agora no WhatsApp</a>
+      <p class="grande">Criasiteweb · (11) 99451-6869<br /><a class="link" href="https://criasiteweb.github.io/pizzaria-vitoria/" target="_blank" rel="noopener">Ver um sistema pronto</a></p>
+    </section>
+
+  </div>
+
+  <div class="barra">
+    <button type="button" data-voltar aria-label="Voltar">‹</button>
+    <button type="button" class="frente" data-avancar>Próximo</button>
+    <span class="conta" data-conta>1 / 11</span>
+  </div>
+</div>
+
+<script>
+  const slides = [...document.querySelectorAll(".slide")];
+  const passos = document.querySelector("[data-passos]");
+  const conta  = document.querySelector("[data-conta]");
+  const btVolta = document.querySelector("[data-voltar]");
+  const btFrente = document.querySelector("[data-avancar]");
+  let atual = 0;
+
+  passos.innerHTML = slides.map(() => "<i></i>").join("");
+  const marcas = [...passos.children];
+
+  function mostrar(n) {
+    atual = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, i) => s.classList.toggle("ativo", i === atual));
+    marcas.forEach((m, i) => m.classList.toggle("feito", i <= atual));
+    conta.textContent = (atual + 1) + " / " + slides.length;
+    btVolta.disabled = atual === 0;
+    btFrente.textContent = atual === slides.length - 1 ? "Recomeçar" : "Próximo";
+    slides[atual].scrollTop = 0;
+  }
+  btFrente.addEventListener("click", () => mostrar(atual === slides.length - 1 ? 0 : atual + 1));
+  btVolta.addEventListener("click", () => mostrar(atual - 1));
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight" || e.key === " ") mostrar(atual + 1);
+    if (e.key === "ArrowLeft") mostrar(atual - 1);
+  });
+
+  /* arrastar com o dedo */
+  let x0 = null, y0 = null;
+  document.addEventListener("touchstart", e => {
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener("touchend", e => {
+    if (x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    const dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) mostrar(atual + (dx < 0 ? 1 : -1));
+    x0 = y0 = null;
+  }, { passive: true });
+
+  mostrar(0);
+</script>
+</body>
+</html>
